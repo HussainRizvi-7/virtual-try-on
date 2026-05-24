@@ -1,0 +1,33 @@
+# OOTDiffusion requirements
+# torch is installed separately via constraints.txt (torch==2.5.1+cu121)
+
+# Core diffusers stack — pinned to match pipeline_ootd.py API surface
+# pipeline_ootd.py uses PIL_INTERPOLATION and adjust_lora_scale_text_encoder
+# which were removed in diffusers 0.26+. Do not upgrade diffusers.
+diffusers==0.24.0
+transformers==4.36.2
+accelerate==0.26.1
+
+# HuggingFace utilities
+# diffusers 0.24.0 uses cached_download which was removed in huggingface_hub 0.25+
+huggingface_hub==0.21.4
+safetensors>=0.4.0
+
+# Human parsing (ONNX, runs on CPU — no detectron2 needed)
+# onnxruntime 1.16.x was compiled against numpy 1.x and fails with numpy 2.x
+# Use 1.18+ which supports numpy 2.x
+onnxruntime>=1.18.0
+
+# Vision / array
+numpy>=1.24.4
+scipy>=1.10.1
+scikit-image>=0.21.0
+opencv-python>=4.7.0.72
+pillow>=9.4.0
+
+# Misc
+einops==0.7.0
+config==0.5.1
+tqdm>=4.64.1
+matplotlib>=3.7.4
+packaging>=21.0
